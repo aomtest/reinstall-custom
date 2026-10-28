@@ -22,15 +22,9 @@ One-Click OS reinstallation script for VPS [中文](README.md)
 - Supports BIOS and EFI boot, and ARM Server
 - No homemades image included, all resources are obtained in real-time from mirror sites
 
-Buy me a milk tea:
-[![Donate](https://img.shields.io/badge/Donate-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/bin456789)
-
-[![Sponsors](https://raw.githubusercontent.com/bin456789/sponsors/refs/heads/master/sponsors.svg)](https://github.com/sponsors/bin456789)
-
 ### Feedback
 
 [![GitHub Issues](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aomtest/reinstall-custom/issues)
-[![Telegram Group](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/reinstall_os)
 
 ## Quick Start
 
@@ -724,11 +718,4 @@ bash reinstall.sh ...
 1. Fork this repository.
 2. Modify the `confhome` at the beginning of `reinstall.sh` and `reinstall.bat`.
 3. Make changes to the other code.
-4. Download and run your `reinstall.sh` or `reinstall.bat`."
-
-## Thanks
-
-Thanks to the following businesses for providing free servers.
-
-[![Oracle Cloud](https://github.com/bin456789/reinstall/assets/7548515/8b430ed4-8344-4f96-b4da-c2bda031cc90)](https://www.oracle.com/cloud/)
-[![DartNode](https://github.com/bin456789/reinstall/assets/7548515/435d6740-bcdd-4f3a-a196-2f60ae397f17)](https://dartnode.com/)
+4. Download and run your `reinstall.sh` or `reinstall.bat`.

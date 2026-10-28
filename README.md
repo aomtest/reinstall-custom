@@ -22,15 +22,9 @@
 - 支持 BIOS、EFI 引导，支持 ARM 服务器
 - 不含自制包，所有资源均实时从镜像源获得
 
-请我喝奶茶：
-[![Donate](https://img.shields.io/badge/Donate-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/bin456789)
-
-[![Sponsors](https://raw.githubusercontent.com/bin456789/sponsors/refs/heads/master/sponsors.svg)](https://github.com/sponsors/bin456789)
-
 ### 反馈
 
 [![GitHub Issues](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aomtest/reinstall-custom/issues)
-[![Telegram Group](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/reinstall_os)
 
 ## 快速开始
 
@@ -725,10 +719,3 @@ bash reinstall.sh ...
 2. 修改 `reinstall.sh` 和 `reinstall.bat` 开头的 `confhome`
 3. 修改其它代码
 4. 下载并运行你的 `reinstall.sh` 或 `reinstall.bat`
-
-## 感谢
-
-感谢以下商家提供白嫖机器
-
-[![Oracle Cloud](https://github.com/bin456789/reinstall/assets/7548515/8b430ed4-8344-4f96-b4da-c2bda031cc90)](https://www.oracle.com/cloud/)
-[![DartNode](https://github.com/bin456789/reinstall/assets/7548515/435d6740-bcdd-4f3a-a196-2f60ae397f17)](https://dartnode.com/)
