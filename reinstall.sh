@@ -3628,6 +3628,27 @@ build_finalos_cmdline() {
 }
 
 build_extra_cmdline() {
+    # 正式系统未指定端口时随机生成，避免默认 22 被扫
+    # 10000 起，排除常见服务端口
+    # 仅 debian/kali 的应答文件支持改端口，其它发行版的 ssh 只在安装期间使用，保持默认
+    if [ -z "$ssh_port" ]; then
+        case "$distro" in
+        debian | kali)
+            local _rnd _cand
+            while :; do
+                _rnd=$(od -An -N2 -tu2 /dev/urandom 2>/dev/null | tr -dc '0-9')
+                [ -z "$_rnd" ] && break
+                _cand=$((_rnd % 55536 + 10000))
+                case " 10000 11211 15672 16379 25565 27017 27018 33060 50000 50070 " in
+                *" $_cand "*) continue ;;
+                esac
+                ssh_port=$_cand
+                break
+            done
+            ;;
+        esac
+    fi
+
     # 使用 extra_xxx=yyy 而不是 extra.xxx=yyy
     # 因为 debian installer /lib/debian-installer-startup.d/S02module-params
     # 会将 extra.xxx=yyy 写入新系统的 /etc/modprobe.d/local.conf
