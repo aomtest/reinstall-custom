@@ -6,9 +6,7 @@
 # alpine 默认没有 bash，因此 shebang 用 sh，再 exec 切换到 bash
 
 set -eE
-confhome=https://raw.githubusercontent.com/bin456789/reinstall/main
-confhome_cn=https://cnb.cool/bin456789/reinstall/-/git/raw/main
-# confhome_cn=https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main
+confhome=https://raw.githubusercontent.com/aomtest/reinstall-custom/main
 
 # 用于判断 reinstall.sh 和 trans.sh 是否兼容
 SCRIPT_VERSION=4BACD833-A585-23BA-6CBB-9AA4E08E0005
@@ -229,8 +227,6 @@ mask2cidr() {
 }
 
 is_in_china() {
-    [ "$force_cn" = 1 ] && return 0
-
     if [ -z "$_loc" ]; then
         # www.cloudflare.com/dash.cloudflare.com 国内访问的是美国服务器，而且部分地区被墙
         # 以下这些都是用 cf cdn 且开通了国内 cdn 节点
@@ -3637,7 +3633,7 @@ build_extra_cmdline() {
     # 会将 extra.xxx=yyy 写入新系统的 /etc/modprobe.d/local.conf
     # https://answers.launchpad.net/ubuntu/+question/249456
     # https://salsa.debian.org/installer-team/rootskel/-/blob/master/src/lib/debian-installer-startup.d/S02module-params?ref_type=heads
-    for key in confhome hold force_boot_mode force_cn force_old_windows_setup cloud_image no_cloud_kernel no_auto_drivers main_disk \
+    for key in confhome hold force_boot_mode force_old_windows_setup cloud_image no_cloud_kernel no_auto_drivers main_disk \
         elts deb_mirror \
         username ssh_port rdp_port web_port web_path allow_ping; do
         value=${!key}
@@ -4700,20 +4696,6 @@ init_confhome() {
         # shellcheck disable=SC2001
         confhome=$(echo "$confhome" | sed "s/main$/$commit/")
     fi
-
-    # 设置国内代理
-    # 要在使用 wmic 前设置，否则国内机器会从国外源下载 wmic.ps1
-    # gitee 不支持ipv6
-    # jsdelivr 有12小时缓存
-    # https://github.com/XIU2/UserScript/blob/master/GithubEnhanced-High-Speed-Download.user.js#L31
-    if is_in_china; then
-        if [ -n "$confhome_cn" ]; then
-            confhome=$confhome_cn
-        elif [ -n "$github_proxy" ] && [[ "$confhome" = http*://raw.githubusercontent.com/* ]]; then
-            confhome=${confhome/http:\/\//https:\/\/}
-            confhome=${confhome/https:\/\/raw.githubusercontent.com/$github_proxy}
-        fi
-    fi
 }
 
 remove_exist_reinstall_efi_dir() {
@@ -4971,7 +4953,7 @@ fi
 
 # 整理参数
 long_opts=
-for o in ci installer debug minimal no-cloud-kernel no-auto-drivers allow-ping force-cn help \
+for o in ci installer debug minimal no-cloud-kernel no-auto-drivers allow-ping help \
     add-driver: \
     hold: sleep: \
     iso: \
@@ -5078,11 +5060,6 @@ while true; do
         ;;
     --allow-ping)
         allow_ping=1
-        shift
-        ;;
-    --force-cn)
-        # 仅为了方便测试
-        force_cn=1
         shift
         ;;
     --hold | --sleep)

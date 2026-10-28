@@ -2,9 +2,7 @@
 mode con cp select=437 >nul
 setlocal EnableDelayedExpansion
 
-set confhome=https://raw.githubusercontent.com/bin456789/reinstall/main
-set confhome_cn=https://cnb.cool/bin456789/reinstall/-/git/raw/main
-rem set confhome_cn=https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main
+set confhome=https://raw.githubusercontent.com/aomtest/reinstall-custom/main
 
 set pkgs=curl,cpio,p7zip,dos2unix,jq,xz,gzip,zstd,openssl,bind-utils,libiconv,binutils
 set cmds=curl,cpio,p7zip,dos2unix,jq,xz,gzip,zstd,openssl,nslookup,iconv,ar
@@ -53,15 +51,6 @@ findstr /c:"loc=CN" geoip >nul
 if not errorlevel 1 (
     rem mirrors.tuna.tsinghua.edu.cn 会强制跳转 https
     set mirror=http://mirror.nju.edu.cn
-    if defined confhome_cn (
-        set confhome=!confhome_cn!
-    ) else if defined github_proxy (
-        echo !confhome! | findstr /c:"://raw.githubusercontent.com/" >nul
-        if not errorlevel 1 (
-            set confhome=!confhome:http://=https://!
-            set confhome=!confhome:https://raw.githubusercontent.com=%github_proxy%!
-        )
-    )
 ) else (
     rem 服务器在美国 equinix 机房，不是 cdn
     set mirror=http://mirrors.kernel.org

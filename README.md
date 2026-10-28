@@ -722,7 +722,7 @@ bash reinstall.sh ...
 ## 如何修改脚本自用
 
 1. Fork 本仓库
-2. 修改 `reinstall.sh` 和 `reinstall.bat` 开头的 `confhome` 和 `confhome_cn`
+2. 修改 `reinstall.sh` 和 `reinstall.bat` 开头的 `confhome`
 3. 修改其它代码
 4. 下载并运行你的 `reinstall.sh` 或 `reinstall.bat`
 

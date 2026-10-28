@@ -722,7 +722,7 @@ bash reinstall.sh ...
 ## How to Modify the Script for Your Own
 
 1. Fork this repository.
-2. Modify the `confhome` and `confhome_cn` at the beginning of `reinstall.sh` and `reinstall.bat`.
+2. Modify the `confhome` at the beginning of `reinstall.sh` and `reinstall.bat`.
 3. Make changes to the other code.
 4. Download and run your `reinstall.sh` or `reinstall.bat`."
 
