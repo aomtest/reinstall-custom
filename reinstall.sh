@@ -3634,17 +3634,27 @@ build_extra_cmdline() {
     if [ -z "$ssh_port" ]; then
         case "$distro" in
         debian | kali)
-            local _rnd _cand
-            while :; do
+            local _rnd _cand _try=0
+            while [ "$_try" -lt 100 ]; do
+                _try=$((_try + 1))
                 _rnd=$(od -An -N2 -tu2 /dev/urandom 2>/dev/null | tr -dc '0-9')
-                [ -z "$_rnd" ] && break
-                _cand=$((_rnd % 55536 + 10000))
+                if [ -z "$_rnd" ]; then
+                    break
+                fi
+                # 拒绝采样消除取模偏倚：只接受 0-55535，落在 55536-65535 的重抽
+                if [ "$_rnd" -ge 55536 ]; then
+                    continue
+                fi
+                _cand=$((_rnd + 10000))
                 case " 10000 11211 15672 16379 25565 27017 27018 33060 50000 50070 " in
                 *" $_cand "*) continue ;;
                 esac
                 ssh_port=$_cand
                 break
             done
+            if [ -z "$ssh_port" ]; then
+                warn "随机 ssh 端口生成失败，保持默认 22"
+            fi
             ;;
         esac
     fi
